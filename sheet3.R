@@ -31,3 +31,15 @@ par(mfrow=c(1,2))
 binorm_plot(sigma1 = 1, sigma2 = 1, rho = 0.9)
 binorm_plot(sigma1 = 1, sigma2 = 1, rho = 0.9, type = "3d", phi = 35,
             theta = 120)
+
+library(manipulate)
+manipulate(binorm_plot(sigma1, sigma2, rho, type = "3d", phi, theta),
+           sigma1 = slider(0.5, 4, step = 0.5),
+           sigma2 = slider(0.5, 4, step = 0.5),
+           rho = slider(-.9, .9, step = 0.1),
+           phi = slider(0, 90, step = 10),
+           theta = slider(0, 90, step = 10))
+manipulate(binorm_plot(sigma1, sigma2, rho),
+           sigma1 = slider(0.5, 4, step = 0.5),
+           sigma2 = slider(0.5, 4, step = 0.5),
+           rho = slider(-.9, .9, step = 0.1))
