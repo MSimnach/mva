@@ -80,8 +80,8 @@ binorm_jmc_plot <- function(x, sigma_y, sigma_x, rho){
   p3 <- ggplot(condi, aes(x = x)) +
     geom_line(aes(y = values_m)) +
     geom_line(aes(y = values_c), lty = 2) +
-    geom_vline(xintercept = mu_c, colour = "orange") +
-    geom_vline(xintercept = mu_c, colour = "red", lty = "ff") +
+    geom_vline(xintercept = 0, colour = "orange") +
+    geom_vline(xintercept= mu_c, colour = "red", lty = "ff") +
     theme_bw() +
     xlab("y") + ylab("f(y), f(y|x)") +
     scale_y_continuous(limits = c(0, 1)) +
