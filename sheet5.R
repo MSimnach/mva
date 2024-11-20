@@ -215,3 +215,10 @@ fit_mvdc@estimate
 
 ## h) Use the estimated joint distribution to find the expected share of income attributed to
 # property assets for incomes between 4000 and 5000€.
+sample_cond <- data.frame(rMvdc(n = 10000, mv_dens_est))
+sample_cond$range <- sample_cond[, 1] > 4 & sample_cond[, 1] < 5
+ggplot(sample_cond, aes(x = X1, y = X2, color = range)) +
+  geom_point() +
+  geom_vline(xintercept = c(4, 5), color = "blue") +
+  scale_color_manual(values = c("black", "red"), guide = "none")
+summary(sample_cond[sample_cond$range, 2])
