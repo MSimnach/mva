@@ -29,3 +29,19 @@ wilks_l <- det(W)/det(Total_T)
 F_stat <- (1-sqrt(wilks_l))/sqrt(wilks_l)*(g*(n-1)-p+1)/p
 qf(0.95, 2*p, 2*(g*(n-1)-p+1))
 # cannot reject H0
+
+# tests for assumption of multivariate normality
+library(MVN)
+X1 <-matrix(c(0.0,  0.2, -0.4, -0.4, 0.4, 0.8, 0.8, -0.2, -0.2, 0.8, -0.6, -0.8, 0.2, -0.4, 0.2), ncol=3)
+mvn(X1, mvnTest="energy")
+S1 <- cov(X1)
+# Calculate Mahalanobis distances for each observation
+D2 <- mahalanobis(X1, center = X1_mean, cov = S1)
+# Generate theoretical chi-square quantiles
+chi_sq_quantiles <- qchisq(ppoints(n), df = p)
+# Create a Q-Q plot comparing observed D2 to chi-square quantiles
+qqplot(chi_sq_quantiles, D2,
+       main = "Q–Q Plot of Mahalanobis Distances",
+       xlab = expression(paste("Chi-square Quantiles (df=", p, ")")),
+       ylab = "Ordered Mahalanobis Distances")
+abline(0, 1, col="red")
